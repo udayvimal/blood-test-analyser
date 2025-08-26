@@ -1,0 +1,26 @@
+ @"
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env
+.env.*
+.venv/
+venv/
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project
+data/
+outputs/
+"@ | Out-File -Encoding utf8 .gitignore
