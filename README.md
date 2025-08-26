@@ -1,72 +1,7 @@
 🩺 Blood Test Report Analyser (CrewAI + FastAPI)
 
 This project provides an API to analyse uploaded blood test reports (PDFs) and return a structured, evidence-informed summary with next steps. It uses FastAPI for serving endpoints, CrewAI for orchestration, and LangChain tools for reading PDF data.
-
-📦 Setup & Installation
-1. Clone repo & create venv
-git clone <your-repo-url>
-cd blood-test-analyser
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-
-2. Install dependencies
-pip install -r requirements.txt
-
-
-requirements.txt
-
-fastapi
-uvicorn
-crewai
-crewai-tools
-python-dotenv
-langchain
-langchain-community
-langchain-openai
-pydantic>=2
-
-3. Environment variables
-
-Create a .env file:
-
-OPENAI_API_KEY=your_openai_key
-OPENAI_MODEL=gpt-4o-mini
-SERPER_API_KEY=your_serper_key   # optional if using search tool
-
-4. Run server
-uvicorn main:app --reload --port 8000
-
-
-Health check: http://localhost:8000
-
-📡 API Documentation
-POST /analyze
-
-Upload a PDF + optional query.
-
-Form fields
-
-file → PDF (required)
-
-query → string (optional, default = “Summarise my Blood Test Report”)
-
-Example request
-
-curl -X POST http://localhost:8000/analyze \
-  -F "file=@data/sample.pdf" \
-  -F "query=Summarise abnormalities and next steps"
-
-
-Response
-
-{
-  "status": "success",
-  "query": "Summarise abnormalities and next steps",
-  "analysis": "<CrewAI analysis>",
-  "file_processed": "sample.pdf"
-}
-
-🐛 Bug Fix Log
+ 🐛 Bug Fix Log
 
 Here’s a structured log of all bugs found and how they were fixed.
 
@@ -154,6 +89,71 @@ FIX: Added guard: return helpful OCR message if no text extracted.
 
 BUG: NutritionTool/ExerciseTool async methods not CrewAI-compatible.
 FIX: Converted to BaseTool subclasses with _run stubs.
+
+📦 Setup & Installation
+1. Clone repo & create venv
+git clone <your-repo-url>
+cd blood-test-analyser
+python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
+
+2. Install dependencies
+pip install -r requirements.txt
+
+
+requirements.txt
+
+fastapi
+uvicorn
+crewai
+crewai-tools
+python-dotenv
+langchain
+langchain-community
+langchain-openai
+pydantic>=2
+
+3. Environment variables
+
+Create a .env file:
+
+OPENAI_API_KEY=your_openai_key
+OPENAI_MODEL=gpt-4o-mini
+SERPER_API_KEY=your_serper_key   # optional if using search tool
+
+4. Run server
+uvicorn main:app --reload --port 8000
+
+
+Health check: http://localhost:8000
+
+📡 API Documentation
+POST /analyze
+
+Upload a PDF + optional query.
+
+Form fields
+
+file → PDF (required)
+
+query → string (optional, default = “Summarise my Blood Test Report”)
+
+Example request
+
+curl -X POST http://localhost:8000/analyze \
+  -F "file=@data/sample.pdf" \
+  -F "query=Summarise abnormalities and next steps"
+
+
+Response
+
+{
+  "status": "success",
+  "query": "Summarise abnormalities and next steps",
+  "analysis": "<CrewAI analysis>",
+  "file_processed": "sample.pdf"
+}
+
 
 🏆 Bonus Improvements (optional ideas)
 
